@@ -1,0 +1,148 @@
+<div ng-controller="YourItineraryController">
+  <section class="container" style="padding: 140px 0 50px">
+    <div class="d-flex justify-content-between align-items-baseline">
+      <h1 class="judul" style="padding-bottom: 30px">Your Itineraries</h1>
+
+      <a
+        ui-sref="add-itinerary"
+        class="btn btn-primary pr-4 pl-4"
+        style="border-radius: 20px"
+      >
+        <i class="fa-solid fa-plus pr-1"></i>
+        Create Itinerary</a
+      >
+    </div>
+
+    <!-- Filter Button for Locations -->
+    <div class="d-flex mb-4">
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocation === '', 'btn-outline-primary': selectedLocation !== ''}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterByLocation('')"
+      >
+        All
+      </button>
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocation === 'Bali', 'btn-outline-primary': selectedLocation !== 'Bali'}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterByLocation('Bali')"
+      >
+        Bali
+      </button>
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocation === 'Bandung', 'btn-outline-primary': selectedLocation !== 'Bandung'}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterByLocation('Bandung')"
+      >
+        Bandung
+      </button>
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocation === 'Raja Ampat', 'btn-outline-primary': selectedLocation !== 'Raja Ampat'}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterByLocation('Raja Ampat')"
+      >
+        Raja Ampat
+      </button>
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocation === 'Yogyakarta', 'btn-outline-primary': selectedLocation !== 'Yogyakarta'}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterByLocation('Yogyakarta')"
+      >
+        Yogyakarta
+      </button>
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocation === 'Jakarta', 'btn-outline-primary': selectedLocation !== 'Jakarta'}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterByLocation('Jakarta')"
+      >
+        Jakarta
+      </button>
+    </div>
+
+    <!-- Tampilkan teks jika data kosong -->
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: 40vh"
+      ng-if="filteredItineraries.length === 0"
+    >
+      <h4>Data not found!</h4>
+    </div>
+
+    <!-- Cards Destination -->
+    <div style="margin: 50px 0">
+      <div
+        class="text-left w-100"
+        ng-repeat="itinerary in filteredItineraries = (itineraries | filter:{location: selectedLocation})"
+        style="
+          width: 30%;
+          margin-bottom: 40px;
+          border: 1px solid black;
+          padding: 30px;
+          border-radius: 30px;
+        "
+      >
+        <div class="d-flex justify-content-between align-items-center pt-2">
+          <h3>{{itinerary.title}}</h3>
+
+          <!-- Button Edit and Delete -->
+          <div class="d-flex align-items-center">
+            <a
+              class="btn btn-outline-dark mr-3"
+              style="border-radius: 20px; padding: 5px 25px"
+              ng-click="editItinerary(itinerary._id)"
+            >
+              Edit
+            </a>
+
+            <a
+              class="btn btn-danger"
+              style="border-radius: 20px; padding: 5px 25px"
+              ng-click="deleteItinerary(itinerary._id)"
+            >
+              Delete
+            </a>
+          </div>
+        </div>
+
+        <!-- Days Buttons -->
+        <div class="d-flex flex-row flex-wrap" style="margin-bottom: 20px">
+          <button
+            class="btn mr-3"
+            ng-class="{'btn-primary': selectedDay[itinerary._id] === $index, 'btn-outline-primary': selectedDay[itinerary._id] !== $index }"
+            style="border-radius: 20px; padding: 5px 32px"
+            ng-repeat="day in itinerary.days track by $index"
+            ng-click="selectDay(itinerary._id, $index)"
+          >
+            Day {{$index + 1}}
+          </button>
+        </div>
+
+        <!-- Display Day Details -->
+        <div>
+          <p style="font-weight: bold; margin-bottom: 3px">Pagi</p>
+          <p style="font-size: 13px">
+            {{itinerary.days[selectedDay[itinerary._id] || 0].pagi}}
+          </p>
+          <p style="font-weight: bold; margin-bottom: 3px">Siang</p>
+          <p style="font-size: 13px">
+            {{itinerary.days[selectedDay[itinerary._id] || 0].siang}}
+          </p>
+          <p style="font-weight: bold; margin-bottom: 3px">Sore</p>
+          <p style="font-size: 13px">
+            {{itinerary.days[selectedDay[itinerary._id] || 0].sore}}
+          </p>
+          <p style="font-weight: bold; margin-bottom: 3px">Malam</p>
+          <p style="font-size: 13px">
+            {{itinerary.days[selectedDay[itinerary._id] || 0].malam}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

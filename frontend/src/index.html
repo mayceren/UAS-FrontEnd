@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MainApp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LuxeVoyage</title>
+
+    <!-- Include Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="pages/home/index.css" />
+    <link rel="stylesheet" href="pages/profile/profile.css" />
+
+    <!-- Fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Swiper JS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Include AngularJS and UI-Router from node_modules -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.30/angular-ui-router.min.js"></script>
+    <!-- <script src="/js/angular/angular.min.js"></script> -->
+    <script src="/js/ui-router/release/angular-ui-router.min.js"></script>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- EmailjS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.emailjs.com/dist/email.min.js"
+    ></script>
+
+    <!-- Include custom app.js dan controllers -->
+    <script src="app.js"></script>
+    <script src="pages/home/index.controller.js"></script>
+    <script src="pages/admin/admin.controller.js"></script>
+    <script src="pages/admin/addDestination/addDestination.controller.js"></script>
+    <script src="pages/admin/editDestination/editDestination.controller.js"></script>
+    <script src="pages/admin/addItinerary/addItinerary.controller.js"></script>
+    <script src="pages/admin/editItinerary/editItinerary.controller.js"></script>
+    <script src="pages/auth/register/register.controller.js"></script>
+    <script src="pages/auth/login/login.controller.js"></script>
+    <script src="pages/destination/destination.controller.js"></script>
+    <script src="pages/itinerary/itinerary.controller.js"></script>
+    <script src="pages/contact/contact.controller.js"></script>
+    <script src="pages/profile/profile.controller.js"></script>
+    <script src="pages/profile/updateProfile/updateProfile.controller.js"></script>
+    <script src="pages/favorite/favorite.controller.js"></script>
+    <script src="pages/itinerary/yourItinerary/yourItinerary.controller.js"></script>
+    <script src="pages/itinerary/addItinerary/addItinerary.controller.js"></script>
+    <script src="pages/itinerary/editItinerary/editItinerary.controller.js"></script>
+  </head>
+
+  <body>
+    <div>
+      <!-- Navbar: Only show if user is not admin -->
+      <nav
+        class="fixed-top"
+        style="
+          background-color: white;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        "
+        ng-controller="NavbarController"
+      >
+        <div class="container-fluid p-4 d-flex justify-content-between">
+          <h4>LuxeVoyage</h4>
+
+          <div
+            style="display: flex; gap: 20px; padding-top: 8px"
+            class="navbar"
+          >
+            <a ui-sref="home" ng-class="{'active': isActive('home')}">Home</a>
+            <a
+              ui-sref="destination"
+              ng-class="{'active': isActive('destination')}"
+              >Destination</a
+            >
+            <a ui-sref="itinerary" ng-class="{'active': isActive('itinerary')}"
+              >Itinerary</a
+            >
+            <a ui-sref="contact" ng-class="{'active': isActive('contact')}"
+              >Contact Us</a
+            >
+          </div>
+
+          <!-- Tombol Login atau Profile -->
+          <a
+            class="btn btn-primary"
+            style="border-radius: 50px; padding-left: 30px; padding-right: 30px"
+            ui-sref="login"
+            ng-if="!isLoggedIn"
+          >
+            Login
+          </a>
+          <a
+            class="btn btn-primary"
+            style="border-radius: 50px; padding-left: 30px; padding-right: 30px"
+            ui-sref="profile"
+            ng-if="isLoggedIn"
+          >
+            Profile
+          </a>
+        </div>
+      </nav>
+
+      <!-- Content -->
+      <div ui-view></div>
+
+      <!-- Footer: Only show if user is not admin -->
+      <footer>
+        <section
+          class="footer p-4 bg-primary"
+          style="padding-top: 40px; color: white"
+        >
+          <div class="d-flex justify-content-between">
+            <div>
+              <h3>LuxeVoyage</h3>
+              <p class="pt-1">
+                Travel with us and explore <br />the world without limits.
+              </p>
+            </div>
+
+            <div style="text-align: end">
+              <p style="font-size: 25px; margin-bottom: 0">Get in Touch</p>
+              <a href="#" style="color: white; text-transform: lowercase"
+                >luxevoyage@mail.com</a
+              >
+              <div class="pt-3">
+                <a href="#">
+                  <i
+                    class="fa-brands fa-square-instagram fa-2xl"
+                    style="color: white; margin-left: 20px"
+                  ></i>
+                </a>
+                <a href="#">
+                  <i
+                    class="fa-brands fa-square-facebook fa-2xl"
+                    style="color: white; margin-left: 20px"
+                  ></i>
+                </a>
+                <a href="#">
+                  <i
+                    class="fa-brands fa-square-x-twitter fa-2xl"
+                    style="color: white; margin-left: 20px"
+                  ></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <hr color="white" style="height: 3px; margin-top: 0px" />
+
+          <div class="copyright">
+            <p style="font-size: 14px">
+              &copy;2024 - LuxeVoyage, inc, all rights reserved
+            </p>
+          </div>
+        </section>
+      </footer>
+    </div>
+  </body>
+</html>

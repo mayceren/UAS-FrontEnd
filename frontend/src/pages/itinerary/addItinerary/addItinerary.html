@@ -1,0 +1,147 @@
+<div ng-controller="AddItineraryController">
+  <section class="container" style="padding: 140px 0 50px">
+    <div class="d-flex justify-content-between align-items-baseline">
+      <h1 class="judul" style="padding-bottom: 30px">Add Itinerary</h1>
+
+      <a
+        class="btn btn-outline-dark pr-4 pl-4"
+        style="border-radius: 20px"
+        ui-sref="your-itinerary"
+      >
+        <i class="fa-solid fa-arrow-left pr-1"></i>
+        Back to Itineraries
+      </a>
+    </div>
+
+    <!-- Itinerary Details -->
+    <form
+      name="addItineraryForm"
+      ng-submit="addItinerary(itinerary)"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          ng-model="itinerary.title"
+          placeholder="Enter itinerary title"
+          required
+          style="border-radius: 10px"
+        />
+      </div>
+
+      <div class="form-group d-flex justify-content-center align-items-center">
+        <label for="location" style="width: 260px; padding-top: 10px"
+          >Select your destination :
+        </label>
+        <select
+          id="location"
+          class="form-control"
+          ng-model="itinerary.location"
+          required
+          style="border-radius: 10px"
+        >
+          <option value="" disabled style="color: darkgrey">
+            Select Location
+          </option>
+          <option value="Bali">Bali</option>
+          <option value="Bandung">Bandung</option>
+          <option value="Raja Ampat">Raja Ampat</option>
+          <option value="Yogyakarta">Yogyakarta</option>
+          <option value="Jakarta">Jakarta</option>
+        </select>
+        <span
+          ng-show="addItineraryForm.location.$touched && addItineraryForm.location.$invalid"
+          class="text-danger"
+        >
+          Location is required.
+        </span>
+      </div>
+
+      <!-- Day Details -->
+      <div
+        style="border: 1px solid black; border-radius: 20px; padding: 40px 30px"
+      >
+        <!-- Add/Remove Day Buttons -->
+        <div class="d-flex justify-content-end mb-4">
+          <button
+            type="button"
+            class="btn btn-outline-primary mr-3"
+            ng-click="addDay()"
+            style="border-radius: 20px"
+          >
+            <i class="fa-solid fa-plus"></i> Add Day
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            ng-click="removeDay()"
+            ng-if="itinerary.days.length > 1"
+            style="border-radius: 20px"
+          >
+            <i class="fa-solid fa-minus"></i> Remove Day
+          </button>
+        </div>
+        <div
+          class="form-group"
+          ng-repeat="day in itinerary.days track by $index"
+        >
+          <button
+            type="button"
+            class="btn btn-primary btn-block"
+            ng-click="toggleDayDetails($index)"
+            style="border-radius: 10px; margin-bottom: 10px"
+          >
+            Day {{$index + 1}}
+          </button>
+
+          <!-- Input Fields for Day Details -->
+          <div ng-show="dayDetailsVisible[$index]" class="day-details">
+            <label>Pagi</label>
+            <textarea
+              class="form-control"
+              ng-model="day.pagi"
+              rows="2"
+              style="border-radius: 10px"
+            ></textarea>
+            <label>Siang</label>
+            <textarea
+              class="form-control"
+              ng-model="day.siang"
+              rows="2"
+              style="border-radius: 10px"
+            ></textarea>
+            <label>Sore</label>
+            <textarea
+              class="form-control"
+              ng-model="day.sore"
+              rows="2"
+              style="border-radius: 10px"
+            ></textarea>
+            <label>Malam</label>
+            <textarea
+              class="form-control"
+              ng-model="day.malam"
+              rows="2"
+              style="border-radius: 10px"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Save Button -->
+      <div class="d-flex justify-content-center mt-4">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="border-radius: 20px; padding: 10px 50px"
+          ng-disabled="addItineraryForm.$invalid"
+        >
+          Add Itinerary
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

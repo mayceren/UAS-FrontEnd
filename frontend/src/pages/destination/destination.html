@@ -1,0 +1,167 @@
+<div ng-controller="DestinationController" style="padding: 120px 0 70px">
+  <!-- Destination cards -->
+  <section class="container">
+    <!-- Button Location -->
+    <div class="d-flex">
+      <a
+        ng-click="changeLocation('')"
+        ng-class="{'btn-primary': selectedLocation === '', 'btn-outline-primary': selectedLocation !== ''}"
+        class="btn mr-3"
+        style="border-radius: 20px; padding: 5px 32px"
+        >All</a
+      >
+      <a
+        ng-click="changeLocation('bali')"
+        ng-class="{'btn-primary': selectedLocation === 'bali', 'btn-outline-primary': selectedLocation !== 'bali'}"
+        class="btn mr-3"
+        style="border-radius: 20px; padding: 5px 32px"
+        >Bali</a
+      >
+      <a
+        ng-click="changeLocation('bandung')"
+        ng-class="{'btn-primary': selectedLocation === 'bandung', 'btn-outline-primary': selectedLocation !== 'bandung'}"
+        class="btn mr-3"
+        style="border-radius: 20px; padding: 5px 32px"
+        >Bandung</a
+      >
+      <a
+        ng-click="changeLocation('raja ampat')"
+        ng-class="{'btn-primary': selectedLocation === 'raja ampat', 'btn-outline-primary': selectedLocation !== 'raja ampat'}"
+        class="btn mr-3"
+        style="border-radius: 20px; padding: 5px 32px"
+        >Raja Ampat</a
+      >
+      <a
+        ng-click="changeLocation('yogyakarta')"
+        ng-class="{'btn-primary': selectedLocation === 'yogyakarta', 'btn-outline-primary': selectedLocation !== 'yogyakarta'}"
+        class="btn mr-3"
+        style="border-radius: 20px; padding: 5px 32px"
+        >Yogyakarta</a
+      >
+      <a
+        ng-click="changeLocation('jakarta')"
+        ng-class="{'btn-primary': selectedLocation === 'jakarta', 'btn-outline-primary': selectedLocation !== 'jakarta'}"
+        class="btn mr-3"
+        style="border-radius: 20px; padding: 5px 32px"
+        >Jakarta</a
+      >
+    </div>
+  </section>
+
+  <div
+    class="d-flex justify-content-center align-items-center"
+    style="height: 53.5vh"
+    ng-if="filteredCards.length === 0"
+  >
+    <h4>Data not found!</h4>
+  </div>
+
+  <!-- Cards Destination -->
+  <section class="container">
+    <div class="d-flex flex-row flex-wrap" style="margin: 40px 0">
+      <div
+        class="card text-left"
+        ng-repeat="card in filteredCards"
+        style="width: 30%; margin-bottom: 40px; margin-right: 35px"
+      >
+        <img
+          ng-src="{{ card.image }}"
+          class="card-img-top"
+          style="height: 180px"
+          alt="{{ card.title }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ card.title }}</h5>
+          <p class="card-text">{{ card.description }}</p>
+
+          <div class="d-flex justify-content-between">
+            <a
+              href="{{ card.url_map }}"
+              target="_blank"
+              class="btn btn-outline-primary"
+              style="border-radius: 100%; padding: 15px 15px"
+              ><i class="fa-solid fa-arrow-up-right-from-square fa-lg"></i
+            ></a>
+            <a
+              class="btn btn-outline-danger border-0"
+              style="border-radius: 100%; padding: 15px 18px"
+              ng-click="toggleFavorite(card)"
+            >
+              <i
+                class="fa-regular fa-heart fa-lg"
+                ng-if="card.isFavorite === false"
+              ></i>
+              <i
+                class="fa-solid fa-heart fa-lg"
+                ng-if="card.isFavorite === true"
+              ></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rekomendasi -->
+  <section class="pt-4">
+    <div class="container text-center">
+      <h1 class="judul" style="padding-bottom: 50px">Rekomendasi Destinasi</h1>
+      <!-- Swiper -->
+      <div class="swiper" swiper-directive>
+        <div class="swiper-wrapper">
+          <!-- Swiper Slide -->
+          <div class="swiper-slide" ng-repeat="card in recomendation">
+            <div
+              class="card text-left"
+              style="width: 18rem; margin-bottom: 40px"
+            >
+              <img
+                ng-src="{{ card.image }}"
+                class="card-img-top"
+                style="height: 150px"
+                alt="{{ card.title }}"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ card.title }}</h5>
+                <p class="card-text">{{ card.description }}</p>
+
+                <div class="d-flex justify-content-between">
+                  <!-- URl Maps -->
+                  <a
+                    href="{{ card.url_map }}"
+                    target="_blank"
+                    class="btn btn-outline-primary"
+                    style="border-radius: 100%; padding: 15px 15px"
+                  >
+                    <i class="fa-solid fa-arrow-up-right-from-square fa-lg"></i>
+                  </a>
+
+                  <!-- Add Favorite -->
+                  <a
+                    class="btn btn-outline-danger border-0"
+                    style="border-radius: 100%; padding: 15px 18px"
+                    ng-click="toggleFavorite(card)"
+                  >
+                    <i
+                      class="fa-regular fa-heart fa-lg"
+                      ng-if="card.isFavorite === false"
+                    ></i>
+                    <i
+                      class="fa-solid fa-heart fa-lg"
+                      ng-if="card.isFavorite === true"
+                    ></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Swiper Navigation -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <!-- Swiper Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+</div>

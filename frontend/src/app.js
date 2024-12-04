@@ -21,7 +21,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'pages/auth/login/login.html',
       controller: 'LoginController',
     })
-    // bag chella
+    .state('destination', {
+      url: '/destination?selectedLocation',
+      templateUrl: 'pages/destination/destination.html',
+      controller: 'DestinationController',
+    })
+    .state('itinerary', {
+      url: '/itinerary',
+      templateUrl: 'pages/itinerary/itnerary.html',
+      controller: 'ItineraryController',
+    })
 
     // tempat contact
 
@@ -42,7 +51,55 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         },
       },
     })
-    // bag chella
+    .state('your-itinerary', {
+      url: '/your-itinerary',
+      templateUrl: 'pages/itinerary/yourItinerary/yourItinerary.html',
+      controller: 'YourItineraryController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('home');
+            return $q.reject('Not Authenticated');
+          }
+          return true;
+        },
+      },
+    })
+    .state('add-itinerary', {
+      url: '/add-itinerary',
+      templateUrl: 'pages/itinerary/addItinerary/addItinerary.html',
+      controller: 'YourItineraryController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('home');
+            return $q.reject('Not Authenticated');
+          }
+          return true;
+        },
+      },
+    })
+    .state('edit-itinerary', {
+      url: '/itineraries/:itinerary_id',
+      templateUrl: 'pages/itinerary/editItinerary/editItinerary.html',
+      controller: 'EditItineraryController',
+      resolve: {
+        auth: function ($q, $state, ItineraryService, $stateParams) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+          if (!$stateParams.itinerary_id) {
+            console.error('itinerary_id is missing in resolve!');
+            return $q.reject('Missing itinerary_id');
+          }
+          return ItineraryService.getItinerary($stateParams.itinerary_id);
+        },
+      },
+    });
 });
 
 app.run(function ($transitions, $state) {
@@ -99,7 +156,21 @@ app.controller('NavbarController', function ($scope, $rootScope, $state, AuthSer
   });
 });
 
-// itenerary
+app.service('ItineraryService', function ($http) {
+  const token = sessionStorage.getItem('token');
+
+  this.getItinerary = function (id) {
+    return $http.get(`http://localhost:3001/api/itinerary/${id}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    }).then((res) => res.data);
+  };
+
+  this.updateItinerary = function (itinerary) {
+    return $http.put(`http://localhost:3001/api/itineraries/${itinerary._id}`, itinerary, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+  };
+});
 
 app.directive('fileModel', ['$parse', function ($parse) {
   return {
@@ -118,4 +189,38 @@ app.directive('fileModel', ['$parse', function ($parse) {
 }]);
 
 
-// swiper
+app.directive('swiperDirective', function () {
+  return {
+    link: function () {
+      new Swiper('.swiper', {
+        loop: true,
+        slidesOffsetAfter: 40,
+        slidesOffsetBefore: 40,
+        grabCursor: true,
+        // spaceBetween: 10,
+        // centeredSlides: true,
+        // centerInsufficientSlides: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: false,
+          dynamicBullets: true
+        },
+        breakpoints: {
+          0: {
+            slidesPerView: 1
+          },
+          768: {
+            slidesPerView: 2
+          },
+          1024: {
+            slidesPerView: 3
+          },
+        }
+      });
+    },
+  };
+});
