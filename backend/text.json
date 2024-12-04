@@ -1,0 +1,45 @@
+[
+    {
+        "itinerary_id": 0,
+        "title": "Title 1",
+        "location": "Yogyakarta",
+        "days": [
+            {
+                "pagi": "aktivitas pagi",
+                "siang": "aktivitas siang",
+                "sore": "aktivitas sore",
+                "malam": "aktivitas malam" 
+            },
+            {
+                "pagi": "aktivitas pagi",
+                "siang": "aktivitas siang",
+                "sore": "aktivitas sore",
+                "malam": "aktivitas malam" 
+            },
+            {
+                "pagi": "aktivitas pagi",
+                "siang": "aktivitas siang",
+                "sore": "aktivitas sore",
+                "malam": "aktivitas malam" 
+            },
+            {
+                "pagi": "aktivitas pagi",
+                "siang": "aktivitas siang",
+                "sore": "aktivitas sore",
+                "malam": "aktivitas malam" 
+            },
+            {
+                "pagi": "aktivitas pagi",
+                "siang": "aktivitas siang",
+                "sore": "aktivitas sore",
+                "malam": "aktivitas malam" 
+            },
+            {
+                "pagi": "aktivitas pagi",
+                "siang": "aktivitas siang",
+                "sore": "aktivitas sore",
+                "malam": "aktivitas malam" 
+            }
+        ]
+    }
+]
