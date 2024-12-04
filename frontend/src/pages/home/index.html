@@ -62,7 +62,9 @@
             yang menenangkan. Mulai dari pesona arsitektur urban yang modern
             hingga panorama alam yang menakjubkan.
           </p>
-          <a href="#">explore more <i class="fa fa-arrow-right"></i></a>
+          <a ui-sref="destination" ng-class="{'active': isActive('destination')}" style="color: inherit;">
+            explore more <i class="fa fa-arrow-right"></i>
+        </a>
         </div>
       </div>
       <div class="gallery">
@@ -127,7 +129,8 @@
         <div class="content">
             <p>Bersiaplah untuk menjelajahi dan Temukan tempat-tempat menarik, budaya unik, serta pemandangan 
                 yang memukau di setiap langkah perjalanan Anda.</p>
-            <a href="#">explore more <i class="fa fa-arrow-right"></i></a>
+                <a ui-sref="itinerary" ng-class="{'active': isActive('itinerary')}" style="color: inherit;">
+                  explore more <i class="fa fa-arrow-right"></i>
         </div>
     </div>
     <div class="gallery">
