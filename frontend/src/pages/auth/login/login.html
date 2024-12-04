@@ -1,0 +1,79 @@
+<div ng-controller="LoginController">
+  <section
+    class="d-flex flex-column justify-content-center align-items-center"
+    style="height: 80vh; padding-top: 70px"
+  >
+    <div
+      class="text-center"
+      style="
+        border: 2px solid black;
+        border-radius: 20px;
+        padding: 50px 130px 30px;
+      "
+    >
+      <!-- Judul -->
+      <h2>Sign in</h2>
+
+      <!-- Form Login -->
+      <form ng-submit="login()" class="text-left pt-5 d-flex flex-column">
+        <div class="mb-3">
+          <label style="width: 130px"
+            ><i class="fa-solid fa-envelope pr-3"></i>Email</label
+          >
+          <input
+            style="
+              border: none;
+              width: 230px;
+              padding: 10px 5px;
+              text-transform: none;
+            "
+            placeholder="Enter your username here"
+            type="email"
+            ng-model="credentials.email"
+            required
+          />
+        </div>
+        <div>
+          <label style="width: 130px"
+            ><i class="fa-solid fa-key pr-3"></i>Password</label
+          >
+          <input
+            style="
+              border: none;
+              width: 230px;
+              padding: 10px 5px;
+              text-transform: none;
+            "
+            placeholder="Enter your password here"
+            type="password"
+            ng-model="credentials.password"
+            required
+          />
+        </div>
+
+        <button
+          class="btn btn-outline-dark mt-5 align-self-center"
+          style="
+            border: 2px solid black;
+            padding-left: 40px;
+            padding-right: 40px;
+            border-radius: 50px;
+          "
+          type="submit"
+        >
+          Sign in
+        </button>
+      </form>
+
+      <!-- Pesan Error atau Sukses -->
+      <p class="text-danger mt-3" ng-if="message">{{ message }}</p>
+    </div>
+
+    <div class="d-flex mt-4 justify-content-center align-items-center">
+      <h3 class="pr-2">This your first time?</h3>
+      <a ui-sref="register" style="color: black; text-decoration: underline"
+        >Register here</a
+      >
+    </div>
+  </section>
+</div>

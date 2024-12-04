@@ -1,0 +1,241 @@
+<div ng-controller="FavoriteController">
+  <!-- Button to switch between Destination and Itinerary -->
+  <div class="d-flex justify-content-center mb-4" style="padding: 120px 0 50px">
+    <button
+      class="btn mr-3"
+      ng-class="{'btn-primary': selectedTab === 'destination', 'btn-outline-primary': selectedTab !== 'destination'}"
+      style="border-radius: 20px; padding: 5px 32px"
+      ng-click="selectTab('destination')"
+    >
+      Destination
+    </button>
+    <button
+      class="btn mr-3"
+      ng-class="{'btn-primary': selectedTab === 'itinerary', 'btn-outline-primary': selectedTab !== 'itinerary'}"
+      style="border-radius: 20px; padding: 5px 32px"
+      ng-click="selectTab('itinerary')"
+    >
+      Itinerary
+    </button>
+  </div>
+
+  <!-- Destination -->
+  <section ng-if="selectedTab === 'destination'" class="container">
+    <h1 class="judul" style="padding-bottom: 10px">
+      Your Favorite Destinations
+    </h1>
+
+    <!-- Filter Button for Locations -->
+    <div class="d-flex mb-4">
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocationDestination === '', 'btn-outline-primary': selectedLocationDestination !== ''}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterDestinationsByLocation('')"
+      >
+        All
+      </button>
+      <button
+        class="btn mr-3"
+        ng-repeat="location in availableLocations"
+        ng-class="{'btn-primary': selectedLocationDestination === location, 'btn-outline-primary': selectedLocationDestination !== location}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterDestinationsByLocation(location)"
+      >
+        {{location}}
+      </button>
+    </div>
+
+    <!-- Display No Data Message -->
+    <div
+      ng-if="destinations.length === 0"
+      class="d-flex flex-column justify-content-center align-items-center"
+      style="height: 50vh"
+    >
+      <a
+        ui-sref="destination"
+        style="border-radius: 50px"
+        class="btn mb-4 btn-primary"
+        >Go to Destination</a
+      >
+      <h4 style="font-weight: bold">Add Your Favorite Destination</h4>
+      <p>No Any Destination Favorite</p>
+    </div>
+
+    <!-- Display No Data Filtered Location -->
+    <div
+      ng-if="filteredDestinations.length === 0 && destinations.length > 0"
+      class="d-flex justify-content-center align-items-center"
+      style="height: 40vh"
+    >
+      <h4>Data not found!</h4>
+    </div>
+
+    <!-- Destination Cards -->
+    <div class="d-flex flex-row flex-wrap" style="margin: 0">
+      <div
+        class="card text-left"
+        ng-repeat="card in filteredDestinations"
+        style="width: 30%; margin-bottom: 40px; margin-right: 35px"
+      >
+        <img
+          ng-src="{{ card.destination_id.image }}"
+          class="card-img-top"
+          style="height: 180px"
+          alt="{{ card.destination_id.title }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ card.destination_id.title }}</h5>
+          <p class="card-text">{{ card.destination_id.description }}</p>
+          <div class="d-flex justify-content-between">
+            <!-- URL Map -->
+            <a
+              href="{{ card.destination_id.url_map }}"
+              target="_blank"
+              class="btn btn-outline-primary"
+              style="border-radius: 100%; padding: 15px 15px"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square fa-lg"></i>
+            </a>
+
+            <!-- Favorite -->
+            <a
+              class="btn btn-outline-danger border-0"
+              style="border-radius: 100%; padding: 15px 18px"
+              ng-click="toggleFavoriteDestination(card)"
+            >
+              <i
+                class="fa-regular fa-heart fa-lg"
+                ng-if="card.destination_id.isFavorite === false"
+              ></i>
+              <i
+                class="fa-solid fa-heart fa-lg"
+                ng-if="card.destination_id.isFavorite === true"
+              ></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Itinerary Section -->
+  <section
+    ng-if="selectedTab === 'itinerary'"
+    class="container"
+    style="padding: 10px 0 50px"
+  >
+    <h1 class="judul" style="padding-bottom: 10px">
+      Your Favorite Itineraries
+    </h1>
+
+    <!-- Filter Button for Locations -->
+    <div class="d-flex mb-4">
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedLocationItinerary === '', 'btn-outline-primary': selectedLocationItinerary !== ''}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterItinerariesByLocation('')"
+      >
+        All
+      </button>
+      <button
+        class="btn mr-3"
+        ng-repeat="location in availableLocations"
+        ng-class="{'btn-primary': selectedLocationItinerary === location, 'btn-outline-primary': selectedLocationItinerary !== location}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="filterItinerariesByLocation(location)"
+      >
+        {{location}}
+      </button>
+    </div>
+
+    <!-- Display No Data Message -->
+    <div
+      ng-if="itineraries.length === 0"
+      class="d-flex flex-column justify-content-center align-items-center"
+      style="height: 50vh"
+    >
+      <a
+        ui-sref="itinerary"
+        style="border-radius: 50px"
+        class="btn btn-primary mb-4"
+        >Go to Itinerary</a
+      >
+      <h4 style="font-weight: bold">Add Your Favorite Itinerary</h4>
+      <p>No Any Itinerary Favorite</p>
+    </div>
+
+    <!-- Display No Data Filtered Location -->
+    <div
+      ng-if="filteredItineraries.length === 0 && itineraries.length > 0"
+      class="d-flex justify-content-center align-items-center"
+      style="height: 50vh"
+    >
+      <h4>Data not found!</h4>
+    </div>
+
+    <!-- Itinerary Cards -->
+    <div
+      ng-repeat="itinerary in filteredItineraries"
+      style="
+        border: 1px solid black;
+        border-radius: 30px;
+        padding: 30px;
+        margin-bottom: 20px;
+      "
+    >
+      <div class="d-flex justify-content-between align-items-center pt-2">
+        <h3>{{ itinerary.itinerary_id.title }}</h3>
+
+        <a
+          class="btn btn-outline-danger border-0"
+          style="border-radius: 100%; padding: 15px 18px"
+          ng-click="toggleFavoriteItinerary(itinerary)"
+        >
+          <i
+            class="fa-regular fa-heart fa-lg"
+            ng-class="{'fa-solid': itinerary.itinerary_id.isFavorite, 'fa-regular': !itinerary.itinerary_id.isFavorite}"
+          ></i>
+        </a>
+      </div>
+
+      <!-- Days Buttons -->
+      <div class="d-flex flex-row flex-wrap" style="margin-bottom: 20px">
+        <button
+          class="btn mr-3"
+          ng-class="{'btn-primary': selectedDay[itinerary.itinerary_id._id] === $index, 'btn-outline-primary': selectedDay[itinerary.itinerary_id._id] !== $index }"
+          style="border-radius: 20px; padding: 5px 32px"
+          ng-repeat="day in itinerary.itinerary_id.days track by $index"
+          ng-click="selectDay(itinerary.itinerary_id._id, $index)"
+        >
+          Day {{$index + 1}}
+        </button>
+      </div>
+
+      <!-- Display Details for the Selected Day -->
+      <div>
+        <p style="font-weight: bold; margin-bottom: 0">Pagi</p>
+        <p>
+          {{ itinerary.itinerary_id.days[selectedDay[itinerary.itinerary_id._id]
+          || 0].pagi }}
+        </p>
+        <p style="font-weight: bold; margin-bottom: 0">Siang</p>
+        <p>
+          {{ itinerary.itinerary_id.days[selectedDay[itinerary.itinerary_id._id]
+          || 0].siang }}
+        </p>
+        <p style="font-weight: bold; margin-bottom: 0">Sore</p>
+        <p>
+          {{ itinerary.itinerary_id.days[selectedDay[itinerary.itinerary_id._id]
+          || 0].sore }}
+        </p>
+        <p style="font-weight: bold; margin-bottom: 0">Malam</p>
+        <p>
+          {{ itinerary.itinerary_id.days[selectedDay[itinerary.itinerary_id._id]
+          || 0].malam }}
+        </p>
+      </div>
+    </div>
+  </section>
+</div>

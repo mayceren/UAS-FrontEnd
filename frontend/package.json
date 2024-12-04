@@ -1,0 +1,21 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.1.1",
+    "angular": "^1.8.3",
+    "angular-ui-router": "^1.0.30",
+    "bootstrap": "^5.3.3",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  }
+}
