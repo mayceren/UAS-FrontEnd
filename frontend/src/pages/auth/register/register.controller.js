@@ -22,7 +22,19 @@ angular.module('MainApp')
           console.log("registration success!");
           $scope.message = "Registration successful!";
 
-          $state.go('login');
+          // Menampilkan pesan setelah registrasi sukses
+          Swal.fire({
+            title: 'Registration Successful!',
+            text: 'Your account has been created successfully. Please log in.',
+            icon: 'success',
+            confirmButtonText: 'OK',
+            customClass: {
+              confirmButton: 'swal-button--success'
+            }
+          }).then(() => {
+            // Arahkan pengguna ke halaman login setelah pesan ditutup
+            $state.go('login');
+          });
         })
         .catch(function (error) {
           console.log("registration failed!");
