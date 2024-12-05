@@ -21,36 +21,11 @@
       {{ successMessage }}
     </div>
 
-    <!-- Change Password and Delete Account (Side by Side) -->
-          <div class="d-flex justify-content-between align-items-center mb-3" style="gap: 20px;">
-          <!-- Change Password -->
-          <div class="d-flex flex-column align-items-center">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              style="padding: 8px 30px; border-radius: 20px;"
-              ng-click="togglePasswordField()"
-            >
-              {{ showPasswordField ? 'Cancel Password Change' : 'Change Password' }}
-            </button>
-
-            <!-- Input password (tampilkan hanya jika showPasswordField true) -->
-            <div class="form-group mt-3" ng-if="showPasswordField">
-              <label for="password">New Password:</label>
-              <input
-                type="password"
-                class="form-control"
-                id="password"
-                ng-model="user.password"
-                placeholder="Enter new password"
-              />
-            </div>
-          </div>
     <!-- Form update profile -->
     <form ng-submit="updateProfile()">
       <div class="form-group d-flex align-items-baseline">
         <label style="width: 130px"
-          ><i class="fa-solid fa-user pr-3"></i>New Password</label
+          ><i class="fa-solid fa-user pr-3"></i>Name</label
         >
         <input
           style="
@@ -59,17 +34,17 @@
             padding: 10px 5px;
             text-transform: none;
           "
-          placeholder="Enter new password"
+          placeholder="Enter your name here"
           type="text"
           class="form-control"
-          id="password"
-          ng-model="user.password"
+          id="name"
+          ng-model="user.name"
           required
         />
       </div>
       <div class="form-group d-flex align-items-baseline">
         <label style="width: 130px"
-          ><i class="fa-solid fa-envelope pr-3"></i>Confirm Password</label
+          ><i class="fa-solid fa-envelope pr-3"></i>Email</label
         >
         <input
           style="
@@ -78,21 +53,58 @@
             padding: 10px 5px;
             text-transform: none;
           "
-          type="text"
+          type="email"
           class="form-control"
-          id="password"
-          ng-model="user.password"
-          placeholder="Confirm password"
+          id="email"
+          ng-model="user.email"
+          placeholder="Enter your email"
           required
         />
       </div>
+
+      <!-- Tombol untuk menampilkan input password -->
+      <div class="form-group">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          style="padding: 8px 30px; border-radius: 20px"
+          ng-click="togglePasswordField()"
+        >
+          {{ showPasswordField ? 'Cancel Password Change' : 'Change Password' }}
+        </button>
+      </div>
+
+      <!-- Input password (tampilkan hanya jika showPasswordField true) -->
+      <div class="form-group" ng-if="showPasswordField">
+        <label for="password">New Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          ng-model="user.password"
+          placeholder="Enter new password"
+        />
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center">
+        <div class="form-group mt-5 mb-1">
+          <a
+            class="btn btn-danger"
+            style="border-radius: 20px; padding: 8px 30px; margin-right: 20px;"
+            ng-click="deleteUser(user._id)"
+          >
+            Delete Account
+          </a>
+
           <button
             type="submit"
             class="btn btn-primary"
             style="padding: 8px 30px; border-radius: 20px"
           >
-            Change Password
+            Update
           </button>
+        </div>
+      </div>
     </form>
   </div>
 </section>
