@@ -125,6 +125,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         },
       },
     })
+    .state('about', {
+      url: '/about',
+      templateUrl: 'pages/about/about.html',
+      controller: 'AboutController',
+    })
     .state('register', {
       url: '/register',
       templateUrl: 'pages/auth/register/register.html',
