@@ -1,0 +1,57 @@
+<div ng-controller="ProfileController">
+    <section
+      class="d-flex flex-column justify-content-center align-items-center"
+      style="height: 80vh; padding-top: 70px;"
+    >
+      <div
+        class="d-flex flex-column align-items-center"
+        style="
+          border: 2px solid black;
+          border-radius: 20px;
+          padding: 50px 130px 50px;
+        "
+      >
+        <h1 class="mb-5">Profile</h1>
+        <div>
+            <!-- Name -->
+            <div class="d-flex align-items-lg-baseline">
+                <i class="fa-solid fa-user pr-4 fa-lg"></i>
+                <p class="mr-5">Name</p>
+                <p style="text-transform: none;">: {{user.name}}</p>
+            </div>
+            
+            <!-- Email -->
+            <div class="d-flex align-items-lg-baseline">
+              <i class="fa-solid fa-envelope pr-4 fa-lg"></i>
+              <p class="mr-5">Email</p>
+              <p style="text-transform: none;">: {{user.email}}</p>
+            </div>
+
+            <!-- Update Profile -->
+            <div class="d-flex align-items-lg-baseline" style="margin-bottom: 15px;">
+                <i class="fa-solid fa-user-pen fa-lg" style="padding-right: 19px;"></i>
+                <a ui-sref="update-profile" class="button-profile" style="color: black; cursor: pointer;">Update Profile</a>
+            </div>
+            
+            <!-- Favorite -->
+            <div class="d-flex align-items-lg-baseline" style="margin-bottom: 15px;">
+                <i class="fa-solid fa-heart pr-4 fa-lg text-danger"></i>
+                <a ui-sref="favorite" class="button-profile" style="color: black; cursor: pointer;">Favorite</a>
+            </div>
+            
+            <!-- Your Itinerary -->
+            <div class="d-flex align-items-lg-baseline" style="margin-bottom: 50px;">
+                <i class="fa-solid fa-calendar pr-4 fa-lg"></i>
+                <a ui-sref="your-itinerary" class="button-profile" style="color: black; cursor: pointer;">Your Itinerary</a>
+            </div>
+            
+            <!-- Logout -->
+            <a ng-click="logout()" class="btn btn-danger d-flex align-items-lg-baseline justify-content-center" style="border-radius: 50px;">
+                <i class="fa-solid fa-right-from-bracket pr-4 fa-lg"></i>
+                Logout
+            </a>
+  
+        </div>
+    </section>
+  </div>
+  

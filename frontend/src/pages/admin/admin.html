@@ -1,0 +1,201 @@
+<div ng-controller="AdminController" style="padding-bottom: 50px">
+  <!-- <div
+    class="d-flex justify-content-between align-items-end mb-5"
+    style="padding: 40px 50px 30px; box-shadow: 2px 2px 4px black"
+  >
+    <h4>LuxeVoyage</h4>
+
+    <div class="d-flex justify-content-center">
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedTab === 'destination', 'btn-outline-primary': selectedTab !== 'destination'}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="selectTab('destination')"
+      >
+        Destination
+      </button>
+      <button
+        class="btn mr-3"
+        ng-class="{'btn-primary': selectedTab === 'itinerary', 'btn-outline-primary': selectedTab !== 'itinerary'}"
+        style="border-radius: 20px; padding: 5px 32px"
+        ng-click="selectTab('itinerary')"
+      >
+        Itinerary
+      </button>
+    </div>
+    
+    <a
+      ng-click="logout()"
+      class="btn btn-danger d-flex align-items-lg-center justify-content-center"
+      style="border-radius: 50px; padding-left: 40px; padding-right: 40px;"
+    >
+      <i class="fa-solid fa-right-from-bracket pr-4 fa-lg"></i>
+      Logout
+    </a>
+  </div> -->
+  <!-- Button to switch between Destination and Itinerary -->
+  <div class="d-flex justify-content-center" style="padding: 150px 0 80px">
+    <button
+      class="btn mr-3"
+      ng-class="{'btn-primary': selectedTab === 'destination', 'btn-outline-primary': selectedTab !== 'destination'}"
+      style="border-radius: 20px; padding: 5px 32px"
+      ng-click="selectTab('destination')"
+    >
+      Destination
+    </button>
+    <button
+      class="btn mr-3"
+      ng-class="{'btn-primary': selectedTab === 'itinerary', 'btn-outline-primary': selectedTab !== 'itinerary'}"
+      style="border-radius: 20px; padding: 5px 32px"
+      ng-click="selectTab('itinerary')"
+    >
+      Itinerary
+    </button>
+  </div>
+
+  <!-- Destination Section -->
+  <section ng-if="selectedTab === 'destination'" class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="judul" style="padding-bottom: 10px">Destination Data</h1>
+
+      <a
+        ui-sref="admin-add-destination"
+        class="btn btn-primary pr-4 pl-4"
+        style="border-radius: 20px"
+      >
+        <i class="fa-solid fa-plus pr-1"></i>
+        Create Destination</a
+      >
+    </div>
+
+    <!-- Table for Destinations -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th>Map Link</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="destination in destinations">
+          <td>
+            <img
+              ng-src="{{ destination.image }}"
+              alt="{{ destination.title }}"
+              style="width: 100px; height: 80px"
+            />
+          </td>
+          <td>{{ destination.title }}</td>
+          <td>{{ destination.description }}</td>
+          <td>{{ destination.location }}</td>
+          <td>
+            <a href="{{ destination.url_map }}" target="_blank">View Map</a>
+          </td>
+          <td class="text-center">
+            <button
+              class="btn btn-outline-dark"
+              style="border-radius: 20px; width: 150px"
+              ng-click="editDestination(destination._id)"
+            >
+              Edit
+            </button>
+
+            <button
+              class="btn btn-danger mt-3"
+              style="border-radius: 20px; width: 150px"
+              ng-click="deleteDestination(destination._id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- If no destinations exist -->
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: 950vh"
+      ng-if="destinations.length === 0"
+    >
+      <h4>Data not found!</h4>
+    </div>
+  </section>
+
+  <!-- Itinerary Section -->
+  <section
+    ng-if="selectedTab === 'itinerary'"
+    class="container"
+    style="padding: 10px 0 50px"
+  >
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="judul" style="padding-bottom: 10px">Itinerary Data</h1>
+
+      <a
+        ui-sref="admin-add-itinerary"
+        class="btn btn-primary pr-4 pl-4"
+        style="border-radius: 20px"
+      >
+        <i class="fa-solid fa-plus pr-1"></i>
+        Create Itinerary</a
+      >
+    </div>
+
+    <!-- Table for Itineraries -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Location</th>
+          <th>Days</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="itinerary in itineraries">
+          <td>{{ itinerary.title }}</td>
+          <td>{{ itinerary.location }}</td>
+          <td>
+            <div ng-repeat="day in itinerary.days">
+              <p><strong>Day {{$index + 1}}:</strong></p>
+              <p><strong>Pagi:</strong> {{ day.pagi }}</p>
+              <p><strong>Siang:</strong> {{ day.siang }}</p>
+              <p><strong>Sore:</strong> {{ day.sore }}</p>
+              <p><strong>Malam:</strong> {{ day.malam }}</p>
+            </div>
+          </td>
+          <td class="text-center">
+            <a
+              class="btn btn-outline-dark"
+              style="border-radius: 20px; width: 150px"
+              ng-click="editItinerary(itinerary._id)"
+            >
+              Edit
+            </a>
+
+            <button
+              class="btn btn-danger mt-3"
+              style="border-radius: 20px; width: 150px"
+              ng-click="deleteItinerary(itinerary._id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- If no itineraries exist -->
+    <div
+      class="d-flex justify-content-center align-items-center"
+      style="height: 950vh"
+      ng-if="itineraries.length === 0"
+    >
+      <h4>Data not found!</h4>
+    </div>
+  </section>
+</div>
