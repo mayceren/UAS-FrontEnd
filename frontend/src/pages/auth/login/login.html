@@ -1,14 +1,14 @@
 <div ng-controller="LoginController">
   <section
     class="d-flex flex-column justify-content-center align-items-center"
-    style="height: 80vh; padding-top: 70px; "
+    style="height: 80vh; padding-top: 70px"
   >
     <div
       class="text-center"
       style="
         border: 2px solid black;
         border-radius: 20px;
-        padding: 50px 130px 30px;
+        padding: 50px 100px 30px;
         background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
       "
     >
@@ -18,41 +18,28 @@
       <!-- Form Login -->
       <form ng-submit="login()" class="text-left pt-3 d-flex flex-column">
         <div class="mb-3">
-          <label style="width: 130px; padding-right: 23px"
-            ><i class="fa-solid fa-envelope pr-3" style="margin-right: 10px;"></i>Email</label
-          >
+          <label>
+            <i class="fa-solid fa-envelope pr-3" style="margin-right: 10px;"></i>Email
+          </label>
           <input
-            style="
-              border: none;
-              width: 230px;
-              padding: 10px 5px;
-              text-transform: none;
-              background: transparent;
-            "
             placeholder="Enter your username here"
             type="email"
             ng-model="credentials.email"
             required
           />
         </div>
-        <div>
-          <label style="width: 130px"
-            ><i class="fa-solid fa-key pr-3" style="margin-right: 10px;"></i>Password</label
-          >
+        <div class="password-container">
+          <label>
+            <i class="fa-solid fa-key pr-3" style="margin-right: 10px;"></i>Password
+          </label>
           <input
-            style="
-              border: none;
-              width: 230px;
-              padding: 10px 5px;
-              text-transform: none;
-              background: transparent;
-            "
             placeholder="Enter your password here"
             type="password"
             ng-model="credentials.password"
             required
           />
         </div>
+        
 
         <button
           class="btn btn-outline-light mt-5 align-self-center"
@@ -80,4 +67,48 @@
       >
     </div>
   </section>
+
+  <style>
+    .mb-3,
+    .password-container {
+      display: flex;
+      align-items: center;
+      /* margin-bottom: 5px; */
+    }
+  
+    .mb-3 label,
+    .password-container label {
+      width: 130px;
+      padding-right: 10px;
+    }
+  
+    .mb-3 input,
+    .password-container input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background: transparent;
+    }
+  
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .mb-3,
+      .password-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+  
+      .mb-3 label,
+      .password-container label {
+        width: 100%;
+        padding-right: 0;
+        margin-bottom: 5px;
+      }
+  
+      .mb-3 input,
+      .password-container input {
+        width: 100%;
+      }
+    }
+  </style>  
 </div>
