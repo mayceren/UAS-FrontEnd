@@ -243,7 +243,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
           return ItineraryService.getItinerary($stateParams.itinerary_id);
         },
       },
-    });
+    })
+    .state('change-password', {
+      url: '/change-password',
+      templateUrl: 'pages/profile/changePassword/changePassword.html',
+      controller: 'ChangePasswordController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('profile');
+            return $q.reject('Not Authenticated');
+          }
+          return true;
+        },
+      },
+    })
 });
 
 app.run(function ($transitions, $state) {

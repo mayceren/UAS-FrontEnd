@@ -44,7 +44,14 @@
                 <i class="fa-solid fa-calendar pr-4 fa-lg"></i>
                 <a ui-sref="your-itinerary" class="button-profile" style="color: black; cursor: pointer;">Your Itinerary</a>
             </div>
-            
+                <div>
+                  <!-- Tombol Change Password -->
+                  <a
+                    ui-sref="change-password"
+                    class="btn btn-primary"
+                    style="border-radius: 20px; padding: 8px 30px; margin-right: 20px;"
+                  >Change Password</a>
+                </div>         
             <div class="d-flex justify-content-center align-items-center">
               <div class="form-group mt-5 mb-1">
                 <a
@@ -54,7 +61,6 @@
                 >
                   Delete Account
                 </a>
-      
                 <a ng-click="logout()" class="btn btn-danger d-flex align-items-lg-baseline justify-content-center" style="border-radius: 50px;">
                   <i class="fa-solid fa-right-from-bracket pr-4 fa-lg"></i>
                   Logout
