@@ -1,8 +1,8 @@
 <div ng-controller="FavoriteController">
   <!-- Button to switch between Destination and Itinerary -->
-  <div class="d-flex justify-content-center mb-4" style="padding: 120px 0 50px">
+  <div class="d-flex justify-content-center flex-wrap gap-2 mb-4 py-4">
     <button
-      class="btn mr-3"
+      class="btn"
       ng-class="{'btn-primary': selectedTab === 'destination', 'btn-outline-primary': selectedTab !== 'destination'}"
       style="border-radius: 20px; padding: 5px 32px"
       ng-click="selectTab('destination')"
@@ -10,7 +10,7 @@
       Destination
     </button>
     <button
-      class="btn mr-3"
+      class="btn"
       ng-class="{'btn-primary': selectedTab === 'itinerary', 'btn-outline-primary': selectedTab !== 'itinerary'}"
       style="border-radius: 20px; padding: 5px 32px"
       ng-click="selectTab('itinerary')"
@@ -20,15 +20,18 @@
   </div>
 
   <!-- Destination -->
-  <section ng-if="selectedTab === 'destination'" class="container">
-    <h1 class="judul" style="padding-bottom: 10px">
-      Your Favorite Destinations
+  <section ng-if="selectedTab === 'destination'" class="container"
+  style="padding: 10px 0 50px"
+  >
+    
+  <h1 class="judul" style="padding-bottom: 10px">
+    Your Favorite Destinations
     </h1>
 
     <!-- Filter Button for Locations -->
-    <div class="d-flex mb-4">
+    <div class="d-flex justify-content-center flex-wrap gap-2 mb-4 py-4">
       <button
-        class="btn mr-3"
+        class="btn"
         ng-class="{'btn-primary': selectedLocationDestination === '', 'btn-outline-primary': selectedLocationDestination !== ''}"
         style="border-radius: 20px; padding: 5px 32px"
         ng-click="filterDestinationsByLocation('')"
@@ -36,7 +39,7 @@
         All
       </button>
       <button
-        class="btn mr-3"
+        class="btn"
         ng-repeat="location in availableLocations"
         ng-class="{'btn-primary': selectedLocationDestination === location, 'btn-outline-primary': selectedLocationDestination !== location}"
         style="border-radius: 20px; padding: 5px 32px"
@@ -55,10 +58,10 @@
       <a
         ui-sref="destination"
         style="border-radius: 50px"
-        class="btn mb-4 btn-primary"
+        class="btn btn-primary mb-4"
         >Go to Destination</a
       >
-      <h4 style="font-weight: bold">Add Your Favorite Destination</h4>
+      <h4 class="fw-bold">Add Your Favorite Destination</h4>
       <p>No Any Destination Favorite</p>
     </div>
 
@@ -66,18 +69,19 @@
     <div
       ng-if="filteredDestinations.length === 0 && destinations.length > 0"
       class="d-flex justify-content-center align-items-center"
-      style="height: 40vh"
+      style="height: 50vh"
+
     >
       <h4>Data not found!</h4>
     </div>
 
     <!-- Destination Cards -->
-    <div class="d-flex flex-row flex-wrap" style="margin: 0">
+    <div class="row gy-4 mb-2" >
       <div
-        class="card text-left"
-        ng-repeat="card in filteredDestinations"
-        style="width: 30%; margin-bottom: 40px; margin-right: 35px"
+      class="col-12 col-md-6 col-lg-4"
+      ng-repeat="card in filteredDestinations"
       >
+      <div class="card text-left">
         <img
           ng-src="{{ card.destination_id.image }}"
           class="card-img-top"
@@ -130,9 +134,9 @@
     </h1>
 
     <!-- Filter Button for Locations -->
-    <div class="d-flex mb-4">
+    <div class="d-flex justify-content-center flex-wrap gap-2 mb-4 py-4">
       <button
-        class="btn mr-3"
+        class="btn"
         ng-class="{'btn-primary': selectedLocationItinerary === '', 'btn-outline-primary': selectedLocationItinerary !== ''}"
         style="border-radius: 20px; padding: 5px 32px"
         ng-click="filterItinerariesByLocation('')"
@@ -140,7 +144,7 @@
         All
       </button>
       <button
-        class="btn mr-3"
+        class="btn"
         ng-repeat="location in availableLocations"
         ng-class="{'btn-primary': selectedLocationItinerary === location, 'btn-outline-primary': selectedLocationItinerary !== location}"
         style="border-radius: 20px; padding: 5px 32px"
@@ -162,7 +166,7 @@
         class="btn btn-primary mb-4"
         >Go to Itinerary</a
       >
-      <h4 style="font-weight: bold">Add Your Favorite Itinerary</h4>
+      <h4 class="fw-bold">Add Your Favorite Itinerary</h4>
       <p>No Any Itinerary Favorite</p>
     </div>
 
@@ -203,7 +207,7 @@
       <!-- Days Buttons -->
       <div class="d-flex flex-row flex-wrap" style="margin-bottom: 20px">
         <button
-          class="btn mr-3"
+          class="btn"
           ng-class="{'btn-primary': selectedDay[itinerary.itinerary_id._id] === $index, 'btn-outline-primary': selectedDay[itinerary.itinerary_id._id] !== $index }"
           style="border-radius: 20px; padding: 5px 32px"
           ng-repeat="day in itinerary.itinerary_id.days track by $index"
