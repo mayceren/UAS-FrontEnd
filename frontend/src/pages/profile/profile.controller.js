@@ -1,4 +1,4 @@
-app.controller('ProfileController', function ($scope, $http, AuthService) {
+app.controller('ProfileController', function ($scope, $http, AuthService, $state) {
   // Ambil user_id dari sessionStorage
   const userId = sessionStorage.getItem('user_id');
   const token = sessionStorage.getItem('token');
@@ -11,6 +11,7 @@ app.controller('ProfileController', function ($scope, $http, AuthService) {
   // API URL
   const apiUrl = `http://localhost:3001/api/user/${userId}`;
 
+  // Fungsi untuk mengambil profil pengguna
   $scope.getUserProfile = function () {
     $http
       .get(apiUrl, {
@@ -48,53 +49,56 @@ app.controller('ProfileController', function ($scope, $http, AuthService) {
           'You have been logged out successfully.',
           'success'
         );
+        $state.go('home'); // Redirect ke home setelah logout
       }
     });
-    
-    $scope.deleteUser = function (userId) {
-      console.log("delete user id : ", userId);
-      
-      Swal.fire({
-          title: 'Are you sure?',
-          text: 'Do you want to delete this account?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, delete it!',
-          cancelButtonText: 'No, keep it',
-          reverseButtons: true
-      }).then((result) => {
-          if (result.isConfirmed) {
-              // Jika user memilih untuk menghapus
-              $http.delete(`http://localhost:3001/api/user/${userId}`, {
-                  headers: {
-                      'Authorization': `Bearer ${token}`
-                  }
-              }).then(function (response) {
-                  Swal.fire(
-                      'Deleted!',
-                      'Your Account has been deleted.',
-                      'success'
-                  );
-                  $state.go('home')
-              }).catch(function (error) {
-                  console.error('Error deleting account:', error);
-                  Swal.fire(
-                      'Error!',
-                      'Failed to delete the account.',
-                      'error'
-                  );
-              });
-          } else {
-              // Jika user memilih untuk membatalkan
-              Swal.fire(
-                  'Cancelled',
-                  'Your itinerary is safe :)',
-                  'info'
-              );
-          }
-      });
-    };
   };
 
+  // Fungsi untuk menghapus akun pengguna
+  $scope.deleteUser = function (userId) {
+    console.log("delete user id : ", userId);
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this account?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Jika user memilih untuk menghapus akun
+        $http.delete(`http://localhost:3001/api/user/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }).then(function (response) {
+          Swal.fire(
+            'Deleted!',
+            'Your Account has been deleted.',
+            'success'
+          );
+          $state.go('home'); // Redirect ke home setelah penghapusan akun
+        }).catch(function (error) {
+          console.error('Error deleting account:', error);
+          Swal.fire(
+            'Error!',
+            'Failed to delete the account.',
+            'error'
+          );
+        });
+      } else {
+        // Jika user memilih untuk membatalkan
+        Swal.fire(
+          'Cancelled',
+          'Your account is safe :)',
+          'info'
+        );
+      }
+    });
+  };
+
+  // Ambil profil pengguna saat controller dimuat
   $scope.getUserProfile();
 });
