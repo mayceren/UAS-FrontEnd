@@ -1,62 +1,47 @@
 <div ng-controller="ProfileController">
-  <section class="d-flex flex-column justify-content-center align-items-center" style="height: 80vh; padding-top: 70px; margin-top: 40px; margin-bottom: 110px;">
-    <div class="d-flex flex-column align-items-center profile-container">
-      <h1 class="mb-5">Profile</h1>
-      <div class="d-flex flex-column align-items-start w-100">
+  <section class="profile-section">
+    <div class="profile-container">
+      <h1>Profile</h1>
+      <div class="profile-info">
         <!-- Name -->
-        <div class="d-flex align-items-lg-baseline">
-          <i class="fa-solid fa-user pr-4 fa-lg"></i>
-          <p class="mr-3">Name</p>
-          <p style="text-transform: none;">: {{user.name}}</p>
+        <div class="profile-item">
+          <i class="fa-solid fa-user"></i>
+          <p>Name: {{user.name}}</p>
         </div>
 
         <!-- Email -->
-        <div class="d-flex align-items-lg-baseline">
-          <i class="fa-solid fa-envelope pr-4 fa-lg"></i>
-          <p class="mr-3">Email</p>
-          <p style="text-transform: none;">: {{user.email}}</p>
+        <div class="profile-item">
+          <i class="fa-solid fa-envelope"></i>
+          <p>Email: {{user.email}}</p>
         </div>
 
         <!-- Update Profile -->
-        <div class="d-flex align-items-lg-baseline" style="margin-bottom: 15px;">
-          <i class="fa-solid fa-user-pen fa-lg"></i>
-          <a ui-sref="update-profile" class="button-profile" style="color: black; cursor: pointer;">Update Profile</a>
+        <div class="profile-item">
+          <i class="fa-solid fa-user-pen"></i>
+          <a ui-sref="update-profile">Update Profile</a>
         </div>
 
         <!-- Favorite -->
-        <div class="d-flex align-items-lg-baseline" style="margin-bottom: 15px;">
-          <i class="fa-solid fa-heart pr-4 fa-lg text-danger"></i>
-          <a ui-sref="favorite" class="button-profile" style="color: black; cursor: pointer;">Favorite</a>
+        <div class="profile-item">
+          <i class="fa-solid fa-heart"></i>
+          <a ui-sref="favorite">Favorite</a>
         </div>
 
         <!-- Your Itinerary -->
-        <div class="d-flex align-items-lg-baseline" style="margin-bottom: 50px;">
-          <i class="fa-solid fa-calendar pr-4 fa-lg"></i>
-          <a ui-sref="your-itinerary" class="button-profile" style="color: black; cursor: pointer;">Your Itinerary</a>
+        <div class="profile-item">
+          <i class="fa-solid fa-calendar"></i>
+          <a ui-sref="your-itinerary">Your Itinerary</a>
         </div>
 
-        <!-- Tombol Change Password dan Delete Account berdampingan -->
-        <div class="d-flex justify-content-between align-items-center w-100 mt-4">
-          <div>
-            <a ui-sref="change-password" class="btn btn-primary" style="border-radius: 20px; padding: 8px 30px;">
-              Change Password
-            </a>
-          </div>
-          <div>
-            <a class="btn btn-danger" style="border-radius: 20px; padding: 8px 30px;" ng-click="deleteUser(user._id)">
-              Delete Account
-            </a>            
-          </div>
+        <!-- Change Password and Delete Account Buttons -->
+        <div class="buttons">
+          <a ui-sref="change-password" class="btn btn-primary">Change Password</a>
+          <a ng-click="deleteUser(user._id)" class="btn btn-danger">Delete Account</a>
         </div>
-      </div>
 
-      <!-- Logout Button -->
-      <div class="d-flex justify-content-center align-items-center mt-4">
-        <div class="form-group mt-5 mb-1">
-          <a ng-click="logout()" class="btn btn-danger d-flex align-items-lg-baseline justify-content-center" style="border-radius: 50px;">
-            <i class="fa-solid fa-right-from-bracket pr-4 fa-lg"></i>
-            Logout
-          </a>
+        <!-- Logout Button -->
+        <div class="logout-btn">
+          <a ng-click="logout()" class="btn btn-danger">Logout</a>
         </div>
       </div>
     </div>
