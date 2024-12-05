@@ -19,7 +19,8 @@
       <form ng-submit="login()" class="text-left pt-3 d-flex flex-column">
         <div class="mb-3">
           <label>
-            <i class="fa-solid fa-envelope pr-3" style="margin-right: 10px;"></i>Email
+            <i class="fa-solid fa-envelope pr-3" style="margin-right: 10px"></i
+            >Email
           </label>
           <input
             placeholder="Enter your username here"
@@ -30,7 +31,8 @@
         </div>
         <div class="password-container">
           <label>
-            <i class="fa-solid fa-key pr-3" style="margin-right: 10px;"></i>Password
+            <i class="fa-solid fa-key pr-3" style="margin-right: 10px"></i
+            >Password
           </label>
           <input
             placeholder="Enter your password here"
@@ -39,7 +41,6 @@
             required
           />
         </div>
-        
 
         <button
           class="btn btn-outline-light mt-5 align-self-center"
@@ -69,19 +70,25 @@
   </section>
 
   <style>
+    .mb-3 input,
+    .password-container input {
+      text-transform: none; 
+      text-capitalize: none;
+    }
+
     .mb-3,
     .password-container {
       display: flex;
       align-items: center;
       /* margin-bottom: 5px; */
     }
-  
+
     .mb-3 label,
     .password-container label {
       width: 130px;
       padding-right: 10px;
     }
-  
+
     .mb-3 input,
     .password-container input {
       flex: 1;
@@ -89,7 +96,7 @@
       border: none;
       background: transparent;
     }
-  
+
     /* Media Queries */
     @media (max-width: 768px) {
       .mb-3,
@@ -97,18 +104,18 @@
         flex-direction: column;
         align-items: flex-start;
       }
-  
+
       .mb-3 label,
       .password-container label {
         width: 100%;
         padding-right: 0;
         margin-bottom: 5px;
       }
-  
+
       .mb-3 input,
       .password-container input {
         width: 100%;
       }
     }
-  </style>  
+  </style>
 </div>
