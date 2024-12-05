@@ -68,12 +68,15 @@ app.controller('ProfileController', function ($scope, $http, AuthService, $state
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        // Jika user memilih untuk menghapus akun
         $http.delete(`http://localhost:3001/api/user/${userId}`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
         }).then(function (response) {
+          // Hapus token dan data user dari sessionStorage
+          sessionStorage.removeItem('user_id');
+          sessionStorage.removeItem('token');
+      
           Swal.fire(
             'Deleted!',
             'Your Account has been deleted.',
@@ -88,14 +91,7 @@ app.controller('ProfileController', function ($scope, $http, AuthService, $state
             'error'
           );
         });
-      } else {
-        // Jika user memilih untuk membatalkan
-        Swal.fire(
-          'Cancelled',
-          'Your account is safe :)',
-          'info'
-        );
-      }
+      }      
     });
   };
 
