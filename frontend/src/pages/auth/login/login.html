@@ -1,7 +1,7 @@
 <div ng-controller="LoginController">
   <section
     class="d-flex flex-column justify-content-center align-items-center"
-    style="height: 80vh; padding-top: 70px"
+    style="height: 80vh; padding-top: 70px; "
   >
     <div
       class="text-center"
@@ -9,13 +9,14 @@
         border: 2px solid black;
         border-radius: 20px;
         padding: 50px 130px 30px;
+        background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
       "
     >
       <!-- Judul -->
       <h2 class="fw-bold">Sign in</h2>
 
       <!-- Form Login -->
-      <form ng-submit="login()" class="text-left pt-5 d-flex flex-column">
+      <form ng-submit="login()" class="text-left pt-3 d-flex flex-column">
         <div class="mb-3">
           <label style="width: 130px; padding-right: 23px"
             ><i class="fa-solid fa-envelope pr-3" style="margin-right: 10px;"></i>Email</label
@@ -26,6 +27,7 @@
               width: 230px;
               padding: 10px 5px;
               text-transform: none;
+              background: transparent;
             "
             placeholder="Enter your username here"
             type="email"
@@ -43,6 +45,7 @@
               width: 230px;
               padding: 10px 5px;
               text-transform: none;
+              background: transparent;
             "
             placeholder="Enter your password here"
             type="password"
@@ -52,9 +55,10 @@
         </div>
 
         <button
-          class="btn btn-outline-dark mt-5 align-self-center"
+          class="btn btn-outline-light mt-5 align-self-center"
           style="
-            border: 2px solid black;
+            border: 2px solid #068a98;
+            background-color: #068a98;
             padding-left: 40px;
             padding-right: 40px;
             border-radius: 50px;
