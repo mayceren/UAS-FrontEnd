@@ -2,9 +2,9 @@
 .profile-container {
     border: 2px solid black;
     border-radius: 20px;
-    padding: 50px 130px 50px;
+    padding: 30px 90px 30px;
     width: 100%;
-    max-width: 1200px; /* Membatasi lebar */
+    max-width: 1000px; /* Membatasi lebar */
   }
   
 .button-profile a:hover {
