@@ -21,7 +21,9 @@ const getAllDestinations = async (req, res) => {
 
 const getAllDestinationsWithAuth = async (req, res) => {
     try {
-        const userId = req.user.userId;
+        const userId = req.user.id;
+        console.log("userID:", userId);
+
         const destinations = await Destination.find();
 
         const destinationsWithFavorites = await Promise.all(
@@ -30,9 +32,10 @@ const getAllDestinationsWithAuth = async (req, res) => {
                     users_id: userId,
                     destination_id: destination._id
                 });
+
                 return {
                     ...destination.toObject(),
-                    isFavorite: isFavorite ? true : destination.isFavorite // Gunakan isFavorite dari Favorite jika ada
+                    isFavorite: isFavorite ? true : false
                 };
             })
         );
@@ -63,7 +66,7 @@ const getDestinationById = async (req, res) => {
 };
 
 const getDestinationByIdWithAuth = async (req, res) => {
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     try {
         const destinationId = req.params.id;

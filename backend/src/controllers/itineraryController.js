@@ -31,7 +31,7 @@ const getAllItinerariesWithDays = async (req, res) => {
 // Mendapatkan semua itinerary beserta days menggunakan auth
 const getAllItinerariesWithAuthAndDays = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     const itineraries = await Itinerary.find()
       .populate({
@@ -52,7 +52,7 @@ const getAllItinerariesWithAuthAndDays = async (req, res) => {
 
         return {
           ...itinerary.toObject(),
-          isFavorite: isFavorite ? true : itinerary.isFavorite,
+          isFavorite: isFavorite ? true : false,
           days: itinerary.days
         };
       })
@@ -64,6 +64,7 @@ const getAllItinerariesWithAuthAndDays = async (req, res) => {
     res.status(500).json({ message: 'Error fetching itineraries', error: err.message });
   }
 };
+
 
 const getItinerariesByUser = async (req, res) => {
   try {
@@ -121,7 +122,9 @@ const getItineraryWithDaysById = async (req, res) => {
 
 // Mendapatkan itinerary tertentu beserta days-nya dan data user dengan auth
 const getItineraryWithDaysByIdWithAuth = async (req, res) => {
-  const userId = req.user.userId;
+  const userId = req.user.id;
+  console.log("userID :", userId);
+
   const itineraryId = req.params.id;
 
   try {
