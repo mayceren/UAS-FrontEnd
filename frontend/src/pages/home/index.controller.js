@@ -20,10 +20,17 @@ angular.module('MainApp')
         };
 
         // Arahkan ke halaman destination
-        $scope.goToDestination = function () {
-            const selectedLocation = $scope.searchQuery.toLowerCase();
+        $scope.goToDestination = function (location) {
+            const selectedLocation = location ? location.toLowerCase() : $scope.searchQuery.toLowerCase();
             if (selectedLocation) {
                 $state.go('destination', { selectedLocation: selectedLocation });
+            }
+        };
+
+        // Fungsi untuk navigasi ke halaman itinerary
+        $scope.goToItinerary = function (location) {
+            if (location) {
+                $state.go('itinerary', { selectedLocation: location });
             }
         };
     });

@@ -133,7 +133,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'DestinationController',
     })
     .state('itinerary', {
-      url: '/itinerary',
+      url: '/itinerary?selectedLocation',
       templateUrl: 'pages/itinerary/itnerary.html',
       controller: 'ItineraryController',
     })

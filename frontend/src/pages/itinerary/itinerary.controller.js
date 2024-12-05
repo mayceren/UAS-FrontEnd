@@ -1,6 +1,6 @@
 angular.module('MainApp')
-    .controller('ItineraryController', function ($scope, $http) {
-        $scope.selectedLocation = '';
+    .controller('ItineraryController', function ($scope, $http, $stateParams) {
+        $scope.selectedLocation = $stateParams.selectedLocation || '';
         $scope.itineraries = [];
         $scope.filteredItineraries = [];
         $scope.selectedDay = {};  // Inisialisasi objek untuk menyimpan hari yang dipilih

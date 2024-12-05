@@ -136,7 +136,7 @@
     background: white;
     position: absolute;
     top: 100%;
-    width: 550px;
+    width: 98%;
     border: 1px solid #ddd;
     z-index: 100;
     border-radius: 20px;
@@ -155,7 +155,7 @@
   .destinations {
     width: 100%;
     padding-top: 6rem;
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
   }
   
   .destinations .label {
@@ -215,6 +215,10 @@
     overflow: hidden;
     border-radius: 0.8rem;
     position: relative;
+  }
+
+  .gallery .box:hover{
+    transform: scale(1.03);
   }
   
   .gallery .box img {
@@ -334,12 +338,14 @@
   
   .gem .container h4 {
     color: rgb(255 255 255/90%);
+    font-weight: 500;
   }
   
   .gem .container h2 {
     max-width: 40rem;
     color: white;
     text-align: center;
+    font-weight: bold;
   }
   
   .gem .container p {
@@ -356,6 +362,10 @@
     gap: 1rem;
     margin-top: 2rem;
   }
+
+  .gem .voices .voice:hover {
+    transform: scale(1.03);
+  }
   
   .voices a {
     text-decoration: none;
@@ -365,7 +375,7 @@
   }
   
   .voices h2 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
     color: #d3e5fa;
   }
   
@@ -428,8 +438,8 @@
   }
   
   .article {
-    padding-top: 6rem;
-    padding-bottom: 3rem;
+    padding-top: 1rem;
+    padding-bottom: 5rem;
     margin-top: 5rem;
   }
   
