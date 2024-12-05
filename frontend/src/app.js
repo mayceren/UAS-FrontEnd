@@ -11,6 +11,112 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'HomeController',
     })
     // tempat admin
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'pages/admin/admin.html',
+      controller: 'AdminController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          console.log("decodeToken :", decodedToken)
+          if (decodedToken.role !== 'admin') {
+            $state.go('home');
+            return $q.reject('Not Authorized');
+          }
+          return true;
+        },
+      },
+    })
+    .state('admin-add-destination', {
+      url: '/admin/add-destination',
+      templateUrl: 'pages/admin/addDestination/addDestination.html',
+      controller: 'AddDestinationAdminController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          console.log("decodeToken :", decodedToken)
+          if (decodedToken.role !== 'admin') {
+            $state.go('home');
+            return $q.reject('Not Authorized');
+          }
+          return true;
+        },
+      },
+    })
+    .state('admin-edit-destination', {
+      url: '/admin/edit-destination/:destination_id',
+      templateUrl: 'pages/admin/editDestination/editDestination.html',
+      controller: 'EditDestinationAdminController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          console.log("decodeToken :", decodedToken)
+          if (decodedToken.role !== 'admin') {
+            $state.go('home');
+            return $q.reject('Not Authorized');
+          }
+          return true;
+        },
+      },
+    })
+    .state('admin-add-itinerary', {
+      url: '/admin/add-itinerary',
+      templateUrl: 'pages/admin/addItinerary/addItinerary.html',
+      controller: 'AddItineraryAdminController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          console.log("decodeToken :", decodedToken)
+          if (decodedToken.role !== 'admin') {
+            $state.go('home');
+            return $q.reject('Not Authorized');
+          }
+          return true;
+        },
+      },
+    })
+    .state('admin-edit-itinerary', {
+      url: '/admin/edit-itinerary/:itinerary_id',
+      templateUrl: 'pages/admin/editItinerary/editItinerary.html',
+      controller: 'EditItineraryAdminController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          console.log("decodeToken :", decodedToken)
+          if (decodedToken.role !== 'admin') {
+            $state.go('home');
+            return $q.reject('Not Authorized');
+          }
+          return true;
+        },
+      },
+    })
     .state('register', {
       url: '/register',
       templateUrl: 'pages/auth/register/register.html',
@@ -33,9 +139,42 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     })
 
     // tempat contact
-
+    .state('contact', {
+      url: '/contact',
+      templateUrl: 'pages/contact/contact.html',
+      controller: 'ContactController',
+    })
     // tempat profile
-    
+    .state('profile', {
+      url: '/profile',
+      templateUrl: 'pages/profile/profile.html',
+      controller: 'ProfileController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+          return true;
+        },
+      },
+    })
+    .state('update-profile', {
+      url: '/update-profile',
+      templateUrl: 'pages/profile/updateProfile/updateProfile.html',
+      controller: 'UpdateProfileController',
+      resolve: {
+        auth: function ($q, $state) {
+          const token = sessionStorage.getItem('token');
+          if (!token) {
+            $state.go('login');
+            return $q.reject('Not Authenticated');
+          }
+          return true;
+        },
+      },
+    })
     .state('favorite', {
       url: '/favorite',
       templateUrl: 'pages/favorite/favorite.html',
