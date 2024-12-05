@@ -3,7 +3,6 @@ app.controller('UpdateProfileController', function ($scope, $http, $window, $sta
     const token = sessionStorage.getItem('token');
 
     $scope.user = {}; // Objek user untuk form
-    $scope.showPasswordField = false;
     $scope.errorMessage = null;
     $scope.successMessage = null;
 
@@ -30,11 +29,6 @@ app.controller('UpdateProfileController', function ($scope, $http, $window, $sta
             email: $scope.user.email,
         };
 
-        // Tambahkan password hanya jika diisi
-        if ($scope.user.password) {
-            updateData.password = $scope.user.password;
-        }
-
         $http
             .put(`http://localhost:3001/api/user/${userId}`, updateData, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -51,13 +45,5 @@ app.controller('UpdateProfileController', function ($scope, $http, $window, $sta
                         ? error.data.message
                         : 'Error updating profile. Please try again.';
             });
-    };
-
-    // Fungsi untuk menampilkan atau menyembunyikan input password
-    $scope.togglePasswordField = function () {
-        $scope.showPasswordField = !$scope.showPasswordField;
-        if (!$scope.showPasswordField) {
-            $scope.user.password = '';
-        }
     };
 });
