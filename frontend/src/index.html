@@ -49,7 +49,7 @@
       type="text/javascript"
       src="https://cdn.emailjs.com/dist/email.min.js"
     ></script>
-
+    
     <!-- Include custom app.js dan controllers -->
     <script src="app.js"></script>
     <script src="pages/home/index.controller.js"></script>
@@ -69,6 +69,7 @@
     <script src="pages/itinerary/yourItinerary/yourItinerary.controller.js"></script>
     <script src="pages/itinerary/addItinerary/addItinerary.controller.js"></script>
     <script src="pages/itinerary/editItinerary/editItinerary.controller.js"></script>
+    <script src="pages/about/about.controller.js"></script>
   </head>
 
   <body>
@@ -94,6 +95,9 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" ui-sref="itinerary" ng-class="{'active': isActive('itinerary')}" style="color: white;">Itinerary</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" ui-sref="about" ng-class="{'active': isActive('about')}" style="color: white;">about</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" ui-sref="contact" ng-class="{'active': isActive('contact')}" style="color: white;">Contact Us</a>

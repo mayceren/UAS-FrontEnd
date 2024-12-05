@@ -10,7 +10,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       templateUrl: 'pages/home/index.html',
       controller: 'HomeController',
     })
-    // tempat admin
     .state('admin', {
       url: '/admin',
       templateUrl: 'pages/admin/admin.html',
@@ -22,12 +21,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             $state.go('login');
             return $q.reject('Not Authenticated');
           }
+
           const decodedToken = JSON.parse(atob(token.split('.')[1]));
           console.log("decodeToken :", decodedToken)
           if (decodedToken.role !== 'admin') {
             $state.go('home');
             return $q.reject('Not Authorized');
           }
+
           return true;
         },
       },
@@ -43,12 +44,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             $state.go('login');
             return $q.reject('Not Authenticated');
           }
+
           const decodedToken = JSON.parse(atob(token.split('.')[1]));
           console.log("decodeToken :", decodedToken)
           if (decodedToken.role !== 'admin') {
             $state.go('home');
             return $q.reject('Not Authorized');
           }
+
           return true;
         },
       },
@@ -64,12 +67,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             $state.go('login');
             return $q.reject('Not Authenticated');
           }
+
           const decodedToken = JSON.parse(atob(token.split('.')[1]));
           console.log("decodeToken :", decodedToken)
           if (decodedToken.role !== 'admin') {
             $state.go('home');
             return $q.reject('Not Authorized');
           }
+
           return true;
         },
       },
@@ -92,6 +97,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             $state.go('home');
             return $q.reject('Not Authorized');
           }
+
           return true;
         },
       },
@@ -107,15 +113,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             $state.go('login');
             return $q.reject('Not Authenticated');
           }
+
           const decodedToken = JSON.parse(atob(token.split('.')[1]));
           console.log("decodeToken :", decodedToken)
           if (decodedToken.role !== 'admin') {
             $state.go('home');
             return $q.reject('Not Authorized');
           }
+
           return true;
         },
       },
+    })
+    .state('about', {
+      url: '/about',
+      templateUrl: 'pages/about/about.html',
+      controller: 'AboutController',
     })
     .state('register', {
       url: '/register',
@@ -133,18 +146,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       controller: 'DestinationController',
     })
     .state('itinerary', {
-      url: '/itinerary?selectedLocation',
+      url: '/itinerary',
       templateUrl: 'pages/itinerary/itnerary.html',
       controller: 'ItineraryController',
     })
-
-    // tempat contact
     .state('contact', {
       url: '/contact',
       templateUrl: 'pages/contact/contact.html',
       controller: 'ContactController',
     })
-    // tempat profile
     .state('profile', {
       url: '/profile',
       templateUrl: 'pages/profile/profile.html',
