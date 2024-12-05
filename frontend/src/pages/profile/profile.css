@@ -1,3 +1,63 @@
 .button-profile a:hover {
     text-decoration: underline;
 }
+.d-flex i {
+    margin-right: 10px;
+  }
+  .button-profile {
+    margin-right: 15px;
+  }
+  .btn {
+    margin-top: 10px;
+  }
+
+/* Tambahkan untuk responsivitas */
+@media (max-width: 992px) {
+    .d-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+    .d-flex.flex-column {
+        padding: 30px 50px;
+    }
+    .d-flex.align-items-center {
+        width: 100%;
+        padding: 30px 0;
+    }
+    .d-flex.justify-content-center {
+        width: 100%;
+    }
+
+    .d-flex.align-items-lg-baseline {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Tampilan untuk perangkat mobile */
+@media (max-width: 576px) {
+    .d-flex.align-items-center {
+        padding: 20px;
+    }
+    .d-flex.flex-column.align-items-center {
+        padding: 20px;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    .d-flex.align-items-lg-baseline {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .btn {
+        padding: 10px;
+    }
+}
