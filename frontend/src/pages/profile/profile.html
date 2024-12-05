@@ -1,19 +1,19 @@
 <div ng-controller="ProfileController">
   <section class="d-flex flex-column justify-content-center align-items-center" style="height: 80vh; padding-top: 70px;">
-    <div class="d-flex flex-column align-items-center" style="border: 2px solid black; border-radius: 20px; padding: 50px 130px 50px;">
+    <div class="d-flex flex-column align-items-center profile-container">
       <h1 class="mb-5">Profile</h1>
-      <div class="d-flex flex-column align-items-start">
+      <div class="d-flex flex-column align-items-start w-100">
         <!-- Name -->
         <div class="d-flex align-items-lg-baseline">
           <i class="fa-solid fa-user pr-4 fa-lg"></i>
-          <p class="mr-5">Name</p>
+          <p class="mr-3">Name</p>
           <p style="text-transform: none;">: {{user.name}}</p>
         </div>
 
         <!-- Email -->
         <div class="d-flex align-items-lg-baseline">
           <i class="fa-solid fa-envelope pr-4 fa-lg"></i>
-          <p class="mr-5">Email</p>
+          <p class="mr-3">Email</p>
           <p style="text-transform: none;">: {{user.email}}</p>
         </div>
 
@@ -38,7 +38,7 @@
         <!-- Tombol Change Password dan Delete Account berdampingan -->
         <div class="d-flex justify-content-between align-items-center w-100 mt-4">
           <div>
-            <a ui-sref="change-password" class="btn btn-primary" style="border-radius: 20px; padding: 8px 30px; margin-right: 20px;">
+            <a ui-sref="change-password" class="btn btn-primary" style="border-radius: 20px; padding: 8px 30px;">
               Change Password
             </a>
           </div>

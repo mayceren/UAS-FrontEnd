@@ -1,22 +1,32 @@
+/* Responsif untuk perangkat besar */
 .profile-container {
     border: 2px solid black;
     border-radius: 20px;
     padding: 50px 130px 50px;
     width: 100%;
-    max-width: 1200px;
-}  
+    max-width: 1200px; /* Membatasi lebar */
+  }
+  
 .button-profile a:hover {
     text-decoration: underline;
 }
 .d-flex i {
     margin-right: 10px;
-  }
-  .button-profile {
+}
+.button-profile {
     margin-right: 15px;
-  }
-  .btn {
+}
+
+.d-flex i {
+    margin-right: 10px;
+}
+.d-flex.align-items-lg-baseline {
+    display: flex;
+    align-items: center;
+}
+.btn {
     margin-top: 10px;
-  }
+}
 
 /* Flexbox untuk menata tombol berdampingan */
 .d-flex.justify-content-between {
@@ -31,47 +41,47 @@
 }
 
 
-@media (max-width: 992px) {
+  /* Responsif untuk perangkat dengan layar lebih kecil dari 992px (tablet dan mobile) */
+  @media (max-width: 992px) {
     .profile-container {
       padding: 30px 50px;
     }
-
+  
+    .d-flex {
+      flex-direction: column; /* Menyusun elemen dalam kolom */
+      align-items: center;
+    }
+  
+    .d-flex.align-items-lg-baseline {
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+  
+    /* Tombol diatur agar tampil berdampingan pada layar kecil */
     .d-flex.justify-content-between {
       flex-direction: column;
       align-items: center;
       gap: 10px;
     }
   
-    .d-flex {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .d-flex.align-items-lg-baseline {
-      align-items: center;
-      margin-bottom: 15px;
-    }
-  
     .btn {
       width: 100%;
-      padding: 12px 0;
+      padding: 10px 0;
+      margin-bottom: 10px;
     }
   }
   
+  /* Responsif untuk perangkat dengan layar lebih kecil dari 576px (ponsel) */
   @media (max-width: 576px) {
     .profile-container {
       padding: 20px 15px;
     }
   
-    h1 {
-      font-size: 24px;
-    }
-  
-    .d-flex.justify-content-between {
+    .d-flex.align-items-lg-baseline {
       flex-direction: column;
-      align-items: center;
-      gap: 15px;
+      text-align: center;
+      margin-bottom: 15px;
     }
   
     .btn {
@@ -79,13 +89,8 @@
       margin-bottom: 15px;
     }
   
-    .d-flex.align-items-lg-baseline {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-  
     .fa-lg {
-      font-size: 1.2rem;
+      font-size: 1.5rem; /* Menyesuaikan ukuran ikon untuk layar kecil */
     }
   }
   
