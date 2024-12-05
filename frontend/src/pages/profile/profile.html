@@ -32,19 +32,57 @@
                 <i class="fa-solid fa-user-pen fa-lg" style="padding-right: 19px;"></i>
                 <a ui-sref="update-profile" class="button-profile" style="color: black; cursor: pointer;">Update Profile</a>
             </div>
-            
+
             <!-- Favorite -->
             <div class="d-flex align-items-lg-baseline" style="margin-bottom: 15px;">
-                <i class="fa-solid fa-heart pr-4 fa-lg text-danger"></i>
-                <a ui-sref="favorite" class="button-profile" style="color: black; cursor: pointer;">Favorite</a>
+              <i class="fa-solid fa-heart pr-4 fa-lg text-danger"></i>
+              <a ui-sref="favorite" class="button-profile" style="color: black; cursor: pointer;">Favorite</a>
+          </div>
+          
+          <!-- Your Itinerary -->
+          <div class="d-flex align-items-lg-baseline" style="margin-bottom: 50px;">
+              <i class="fa-solid fa-calendar pr-4 fa-lg"></i>
+              <a ui-sref="your-itinerary" class="button-profile" style="color: black; cursor: pointer;">Your Itinerary</a>
+          </div>
+
+           <!-- Change Password and Delete Account (Side by Side) -->
+        <div class="d-flex justify-content-between align-items-center mb-3" style="gap: 20px;">
+          <!-- Change Password -->
+          <div class="d-flex flex-column align-items-center">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              style="padding: 8px 30px; border-radius: 20px;"
+              ng-click="togglePasswordField()"
+            >
+              {{ showPasswordField ? 'Cancel Password Change' : 'Change Password' }}
+            </button>
+
+            <!-- Input password (tampilkan hanya jika showPasswordField true) -->
+            <div class="form-group mt-3" ng-if="showPasswordField">
+              <label for="password">New Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                ng-model="user.password"
+                placeholder="Enter new password"
+              />
             </div>
-            
-            <!-- Your Itinerary -->
-            <div class="d-flex align-items-lg-baseline" style="margin-bottom: 50px;">
-                <i class="fa-solid fa-calendar pr-4 fa-lg"></i>
-                <a ui-sref="your-itinerary" class="button-profile" style="color: black; cursor: pointer;">Your Itinerary</a>
-            </div>
-            
+          </div>
+
+          <!-- Delete Account -->
+          <div class="d-flex flex-column align-items-center">
+            <a
+              class="btn btn-danger"
+              style="border-radius: 20px; padding: 8px 30px;"
+              ng-click="deleteUser(user._id)"
+            >
+              Delete Account
+            </a>
+          </div>
+        </div>
+        
             <!-- Logout -->
             <a ng-click="logout()" class="btn btn-danger d-flex align-items-lg-baseline justify-content-center" style="border-radius: 50px;">
                 <i class="fa-solid fa-right-from-bracket pr-4 fa-lg"></i>

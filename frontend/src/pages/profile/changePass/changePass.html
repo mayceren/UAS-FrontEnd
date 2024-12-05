@@ -21,11 +21,36 @@
       {{ successMessage }}
     </div>
 
+    <!-- Change Password and Delete Account (Side by Side) -->
+          <div class="d-flex justify-content-between align-items-center mb-3" style="gap: 20px;">
+          <!-- Change Password -->
+          <div class="d-flex flex-column align-items-center">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              style="padding: 8px 30px; border-radius: 20px;"
+              ng-click="togglePasswordField()"
+            >
+              {{ showPasswordField ? 'Cancel Password Change' : 'Change Password' }}
+            </button>
+
+            <!-- Input password (tampilkan hanya jika showPasswordField true) -->
+            <div class="form-group mt-3" ng-if="showPasswordField">
+              <label for="password">New Password:</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                ng-model="user.password"
+                placeholder="Enter new password"
+              />
+            </div>
+          </div>
     <!-- Form update profile -->
     <form ng-submit="updateProfile()">
       <div class="form-group d-flex align-items-baseline">
         <label style="width: 130px"
-          ><i class="fa-solid fa-user pr-3"></i>Name</label
+          ><i class="fa-solid fa-user pr-3"></i>New Password</label
         >
         <input
           style="
@@ -34,17 +59,17 @@
             padding: 10px 5px;
             text-transform: none;
           "
-          placeholder="Enter your name here"
+          placeholder="Enter new password"
           type="text"
           class="form-control"
-          id="name"
-          ng-model="user.name"
+          id="password"
+          ng-model="user.password"
           required
         />
       </div>
       <div class="form-group d-flex align-items-baseline">
         <label style="width: 130px"
-          ><i class="fa-solid fa-envelope pr-3"></i>Email</label
+          ><i class="fa-solid fa-envelope pr-3"></i>Confirm Password</label
         >
         <input
           style="
@@ -53,11 +78,11 @@
             padding: 10px 5px;
             text-transform: none;
           "
-          type="email"
+          type="text"
           class="form-control"
-          id="email"
-          ng-model="user.email"
-          placeholder="Enter your email"
+          id="password"
+          ng-model="user.password"
+          placeholder="Confirm password"
           required
         />
       </div>
@@ -66,7 +91,7 @@
             class="btn btn-primary"
             style="padding: 8px 30px; border-radius: 20px"
           >
-            Update
+            Change Password
           </button>
     </form>
   </div>
